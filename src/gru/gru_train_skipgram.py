@@ -7,7 +7,9 @@ from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.utils.class_weight import compute_class_weight
 import numpy as np
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+)
 
 from embeddings.word2vec_skipgram import train_word2vec_skipgram, build_embedding_matrix
 from models.gru_model import build_gru_model

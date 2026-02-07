@@ -14,7 +14,9 @@ from sklearn.metrics import (
     classification_report,
 )
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+)
 
 MAX_FEATURES = 3000
 MODEL_PATH = "results/gru_tfidf_model.h5"
