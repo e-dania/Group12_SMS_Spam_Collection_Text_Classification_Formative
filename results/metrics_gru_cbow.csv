@@ -1,0 +1,2 @@
+model,embedding,max_len,accuracy,precision,recall,f1
+GRU,Word2Vec Skip-gram,50,0.8261648745519713,0.4,0.5866666666666667,0.4756756756756757
