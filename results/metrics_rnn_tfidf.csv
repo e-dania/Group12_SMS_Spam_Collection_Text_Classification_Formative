@@ -1,0 +1,2 @@
+embedding,best_units,best_dropout,best_lr,test_accuracy,test_precision,test_recall,test_f1,cm_tn,cm_fp,cm_fn,cm_tp,model_path
+tfidf,32,0.2,0.001,0.8655913978494624,0.0,0.0,0.0,483,0,75,0,results\rnn_tfidf_model.h5

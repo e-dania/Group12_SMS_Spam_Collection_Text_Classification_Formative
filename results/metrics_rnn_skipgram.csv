@@ -1,0 +1,2 @@
+embedding,max_len,embed_dim,best_units,best_dropout,best_lr,test_accuracy,test_precision,test_recall,test_f1,cm_tn,cm_fp,cm_fn,cm_tp,model_path
+word2vec_skipgram,30,100,32,0.2,0.001,0.9767025089605734,0.9696969696969697,0.8533333333333334,0.9078014184397163,481,2,11,64,results\rnn_skipgram_model.h5

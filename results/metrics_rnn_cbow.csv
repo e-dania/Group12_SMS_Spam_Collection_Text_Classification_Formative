@@ -1,0 +1,2 @@
+embedding,max_len,embed_dim,best_units,best_dropout,best_lr,test_accuracy,test_precision,test_recall,test_f1,cm_tn,cm_fp,cm_fn,cm_tp,model_path
+word2vec_cbow,30,100,32,0.2,0.001,0.9551971326164874,0.890625,0.76,0.8201438848920863,476,7,18,57,results\rnn_cbow_model.h5
