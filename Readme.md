@@ -75,4 +75,28 @@ python RNN/rnn_tfidf.py
 python RNN/rnn_skipgram.py
 python RNN/rnn_cbow.py
 
+Each script:
 
+Trains the model
+
+Performs basic hyperparameter tuning
+
+Saves the trained model (.h5)
+
+Exports evaluation metrics to CSV
+
+## Evaluation Metrics
+
+All models are evaluated on the test set using:
+
+Accuracy
+
+Precision
+
+Recall
+
+F1-score
+
+Confusion Matrix
+
+Metrics are stored in the results/ directory for easy aggregation and comparison.
