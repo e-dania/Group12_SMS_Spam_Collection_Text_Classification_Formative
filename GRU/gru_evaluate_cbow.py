@@ -9,13 +9,19 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
 
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+SRC_DIR = os.path.join(ROOT_DIR, "src")
+
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
+
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
 
 MAX_LEN = 50
-MODEL_PATH = "results/gru_skipgram_model.h5"
-OUT_METRICS = "results/metrics_gru_skipgram.csv"
+MODEL_PATH = "results/gru_cbow_model.h5"
+OUT_METRICS = "results/metrics_gru_cbow.csv"
 
 
 def load_splits():

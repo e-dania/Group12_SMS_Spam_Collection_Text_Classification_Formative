@@ -1,17 +1,24 @@
 import os
 import sys
 import pandas as pd
+import numpy as np
+
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.utils.class_weight import compute_class_weight
-import numpy as np
 
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+SRC_DIR = os.path.join(ROOT_DIR, "src")
 
-from embeddings.word2vec_skipgram import train_word2vec_skipgram, build_embedding_matrix
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
+
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
+
+from embeddings.word2vec_cbow import train_word2vec_cbow, build_embedding_matrix
 from models.gru_model import build_gru_model
 
 MAX_LEN = 50
@@ -22,11 +29,14 @@ BATCH_SIZE = 32
 def main():
     train_df = pd.read_csv("data/splits/train.csv")
     val_df = pd.read_csv("data/splits/val.csv")
-    
+
+
     train_df["clean_text"] = train_df["clean_text"].fillna("").astype(str)
     val_df["clean_text"] = val_df["clean_text"].fillna("").astype(str)
 
-    # Tokenize
+    train_df = train_df[train_df["clean_text"].str.strip() != ""]
+    val_df = val_df[val_df["clean_text"].str.strip() != ""]
+
     tokenizer = Tokenizer()
     tokenizer.fit_on_texts(train_df["clean_text"])
 
@@ -39,9 +49,8 @@ def main():
     y_train = train_df["label"].values
     y_val = val_df["label"].values
 
-    # Train Word2Vec Skip-gram
     tokenized_texts = [text.split() for text in train_df["clean_text"]]
-    w2v_model = train_word2vec_skipgram(tokenized_texts, EMBED_DIM)
+    w2v_model = train_word2vec_cbow(tokenized_texts, EMBED_DIM)
 
     embedding_matrix = build_embedding_matrix(
         tokenizer.word_index,
@@ -75,8 +84,8 @@ def main():
         verbose=1
     )
 
-    model.save("results/gru_skipgram_model.h5")
-    print("✅ GRU Skip-gram model saved")
+    model.save("results/gru_cbow_model.h5")
+    print("GRU CBOW model saved")
 
 if __name__ == "__main__":
     main()

@@ -1,9 +1,9 @@
 import os
 import sys
 import pandas as pd
+import csv
 from sklearn.model_selection import train_test_split
 
-# Make project root importable
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 PROCESSED_PATH = "data/processed_sms.csv"
@@ -40,11 +40,12 @@ def main():
     val_path = os.path.join(OUT_DIR, "val.csv")
     test_path = os.path.join(OUT_DIR, "test.csv")
 
-    train.to_csv(train_path, index=False)
-    val.to_csv(val_path, index=False)
-    test.to_csv(test_path, index=False)
+    train.to_csv("data/splits/train.csv", index=False, quoting=csv.QUOTE_ALL)
+    val.to_csv("data/splits/val.csv", index=False, quoting=csv.QUOTE_ALL)
+    test.to_csv("data/splits/test.csv", index=False, quoting=csv.QUOTE_ALL)
 
-    print("✅ Splits saved:")
+
+    print("Splits saved:")
     print(" -", train_path, train.shape, train["label"].value_counts().to_dict())
     print(" -", val_path, val.shape, val["label"].value_counts().to_dict())
     print(" -", test_path, test.shape, test["label"].value_counts().to_dict())

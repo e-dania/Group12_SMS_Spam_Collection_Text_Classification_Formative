@@ -10,9 +10,15 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import GRU, Dense, Dropout
 from tensorflow.keras.callbacks import EarlyStopping
 
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+SRC_DIR = os.path.join(ROOT_DIR, "src")
+
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
+
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
 
 MAX_FEATURES = 3000
 EPOCHS = 10
@@ -22,6 +28,7 @@ BATCH_SIZE = 32
 def main():
     train_df = pd.read_csv("data/splits/train.csv")
     val_df = pd.read_csv("data/splits/val.csv")
+
 
     train_df["clean_text"] = train_df["clean_text"].fillna("").astype(str)
     val_df["clean_text"] = val_df["clean_text"].fillna("").astype(str)
